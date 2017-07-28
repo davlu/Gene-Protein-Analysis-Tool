@@ -17,4 +17,10 @@ def ATGC_content(DNA):  #returns ATGC contents in the form of a dict
             ATGCDict['C'] += 1
     return ATGCDict
 
-#todo: hamming differences, complementary base pair completer
+
+def complementary(DNA): #todo: given a DNA sequence, will return a complementary DNA sequence
+    pass
+
+
+def hamming_differences(DNA1,DNA2): #todo: Returns info on positional/nucleotide differences in 2 DNA strands
+    pass
