@@ -23,4 +23,7 @@ def complementary(DNA): #todo: given a DNA sequence, will return a complementary
 
 
 def hamming_differences(DNA1,DNA2): #todo: Returns info on positional/nucleotide differences in 2 DNA strands
+    '''
+    hamming differences:  shatner vs walken
+    '''
     pass
