@@ -41,6 +41,7 @@ def complementary(DNA): #todo: given a DNA sequence, will return a complementary
 
 def hamming_differences(DNA1,DNA2): #todo: Returns info on positional/nucleotide differences in 2 DNA strands
     hDiff = []
+    
     if len(DNA1)>len(DNA2):
         for i in range(len(DNA1)):
             DNA2+='X'
@@ -53,4 +54,5 @@ def hamming_differences(DNA1,DNA2): #todo: Returns info on positional/nucleotide
             nucDiff = n1+n2
             print(str(locDiff)+nucDiff)
             hDiff.append(str(locDiff)+nucDiff)
+            
     return hDiff
