@@ -20,7 +20,7 @@ def ATGC_content(DNA):  #returns ATGC contents in the form of a dict
     return ATGCDict
 
 
-def complementary(DNA): #todo: given a DNA sequence, will return a complementary DNA sequence
+def complementary(DNA): #Given a DNA sequence, will return a complementary DNA sequence
     
     cDNA=[]
     
@@ -39,7 +39,7 @@ def complementary(DNA): #todo: given a DNA sequence, will return a complementary
     return cDNA
 
 
-def hamming_differences(DNA1,DNA2): #todo: Returns info on positional/nucleotide differences in 2 DNA strands
+def hamming_differences(DNA1,DNA2): #Returns info on positional/nucleotide differences in 2 DNA strands in the form of a list
     hDiff = []
     
     if len(DNA1)>len(DNA2):
