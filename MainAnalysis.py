@@ -9,8 +9,7 @@ from analytics.DNAanalysis import ATGC_content
 def main(dna_string):
     if dna_string is not None:
         content = ATGC_content(dna_string)
-        message = click.style('DNA string contains the following \
-                              nucleotides:\n',
+        message = click.style('DNA string contains the following nucleotides:\n',
                               fg='magenta', bold=True)
         for k, v in content.items():
             base = click.style(k, fg='yellow', bold=True)
