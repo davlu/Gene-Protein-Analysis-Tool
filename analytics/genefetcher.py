@@ -43,3 +43,51 @@ def get_sequence(GI): # Example: GI=166706892
 
     #Done
     return sequence
+
+
+
+# Fetch sequence from local file
+def load_sequence():
+    # Loads file name
+	try:
+		# Try: opening and using tkinter GUI. If any errors, you have to manually type it in
+		import tkinter # GUI module
+		from tkinter import filedialog # Choose file function
+		from tkinter.filedialog import askopenfilename # 
+		root = tkinter.Tk() # Makes a root window
+		root.withdraw() # Withdraws window (since root window is not needed)
+		sequence_file = askopenfilename(parent=root,initialdir=cwd,title='Please select a file') # Opens the GUI to pick a file
+		#PS: A fasta file is not needed. Almost any file with proper structure would work
+	except:
+		sequence_file = input('Unable to use GUI. Type your file name with extension: ')
+
+        
+	"""Note: Multi compatible with different files"""
+			
+	# Opens and reads the file
+	with open(sequence_file,'r') as f:
+		DNA_sequence = f.readlines()
+
+	# Checks where the file start and ends
+	for i in DNA_sequence:
+		match = re.match("^[atgc]*$", i.lower()) # Lower case to improve compatibility
+		if match is None: # If line contains something else than a,t,g or c
+			if start_of_sequence is not None:
+				end_of_sequence = i.index(i) # Previous line is the end
+			pass # Pass if line contains something else
+		
+		else: # If line only contains a,t,g and c
+			if start_of_sequence is None:
+				start_of_sequence = i.index(i) # Previous line must be non-sequence info           
+                
+	# Cuts away other parts
+	DNA_sequence = DNA_sequence[start_of_sequence:end_of_sequence]
+    
+    # Makes the sequence into a string (sequence is at this moment a list)
+    DNA_sequence = [line.replace('\n','') for line in DNA_sequence] # Removes \n from list
+    DNA_sequence = ''.join(DNA_sequence) # Joins list into string 
+    DNA_sequence = DNA_sequence.upper() # Makes the sequence into high case
+    
+    # Return string
+    return DNA_sequence
+    
