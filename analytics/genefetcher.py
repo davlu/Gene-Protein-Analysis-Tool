@@ -1,7 +1,7 @@
 # Handles and fetches DNA data from NCBI
 
 # NCBI api
-def get_sequence(GI): # Example: GI=166706892
+def get_sequence(GI,save='No'): # Example: GI=166706892
 
     # Imports from biopython
     from Bio import Entrez
@@ -39,7 +39,18 @@ def get_sequence(GI): # Example: GI=166706892
 
     #Handles sequence
     sequence = r["GBSeq_sequence"].upper() # Make into higher case
-    sequence = list(sequence) # Make into list
+    
+    # If you want the sequence as a list instead of string. When commented, the script returns a long string
+    """sequence = list(sequence) # Make into list"""
 
+    # If save is "Yes" or "yes", save as a file
+    if (save is 'Yes' or save is 'yes'):
+        with open((str(GI)+' DNA_sequence'+'.txt','w') as f: # PS: Directory not set, saves in local work directory
+            for i in sequence: # Should not matter if list or string
+                f.write(sequence)
+    
     #Done
     return sequence
+
+
+
