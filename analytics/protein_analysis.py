@@ -1,8 +1,10 @@
 import re
 
+from analytics.DNAanalysis import complementary
+
 fasta_file = input('Type your fasta file name: ')
 
-codons = {
+CODONS = {
     'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
     'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
     'AAC':'N', 'AAT':'N', 'AAA':'K', 'AAG':'K',
@@ -34,3 +36,29 @@ def dna2AA(fastaFile,codons):
             seq = cont[i:i+3]
             AAsequence += codons[seq]
     return AAsequence
+
+def check3frames(DNA):
+    """Helper function for orf"""
+    proteins = set()
+    for frame in range(3):
+        protein = ""
+        while frame <= len(DNA)-3:
+            codon = DNA[frame:frame+3]
+            if protein == "" and codon != "ATG":
+                frame += 3
+                continue
+            protein += CODONS[codon]
+            frame += 3
+        while "M" in protein:
+            start = protein.index("M")
+            try:
+                stop = protein.index("_",start)
+            except ValueError:
+                break
+            proteins.add(protein[start:stop])
+            protein = protein[start+1:]
+    return proteins
+
+def orf(DNA):
+    """Given a DNA string, returns every distinct candidate protein string that can be translated from open reading frames (ORFs) of the DNA."""
+	return check3frames(DNA) | check3frames(complementary(DNA))
